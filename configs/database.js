@@ -14,7 +14,7 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-// Test connectiongit reset --soft HEAD~2
+// Test connection
 (async () => {
   try {
     const connection = await pool.getConnection();
