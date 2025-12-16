@@ -44,7 +44,7 @@
                 <button class="btn-primary" onclick="openModal('groupModal')" id="btnCreateGroup" style="display:none;">
                     <span>➕</span> Tạo nhóm
                 </button>
-                <button class="btn-primary" onclick="openModal('taskModal')" id="btnCreateTask">
+                <button class="btn-primary" onclick="openCreateTaskModal()" id="btnCreateTask">
                     <span>➕</span> Thêm công việc
                 </button>
             </div>
@@ -131,15 +131,16 @@
         </div>
     </div>
 
-    <!-- Modal Thêm Task -->
+    <!-- Modal Thêm/Sửa Task -->
     <div id="taskModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Thêm công việc</h2>
+                <h2 id="taskModalTitle">Thêm công việc</h2>
                 <span class="close" onclick="closeModal('taskModal')">&times;</span>
             </div>
             <div class="modal-body">
                 <form id="taskForm">
+                    <input type="hidden" id="editTaskId">
                     <div class="form-group">
                         <label>Tên công việc *</label>
                         <input type="text" id="taskName" class="form-control" required>
@@ -231,6 +232,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn-secondary" onclick="closeModal('assignModal')">Đóng</button>
                 <button type="button" class="btn-primary" onclick="assignTaskToUser()">Giao việc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cập nhật trạng thái Task -->
+    <div id="updateStatusModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cập nhật trạng thái</h2>
+                <span class="close" onclick="closeModal('updateStatusModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="updateStatusTaskId">
+                <div class="form-group">
+                    <label>Trạng thái</label>
+                    <select id="updateStatusSelect" class="form-control">
+                        <option value="Pending">⏳ Pending</option>
+                        <option value="In Progress">🔄 In Progress</option>
+                        <option value="Completed">✅ Completed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeModal('updateStatusModal')">Hủy</button>
+                <button type="button" class="btn-primary" onclick="saveStatusUpdate()">Cập nhật</button>
             </div>
         </div>
     </div>
