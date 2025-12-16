@@ -15,8 +15,8 @@ exports.register = async (req, res) => {
         const { username, fullname, email, password } = req.body;
 
         // Validation
-        if (!username || !fullname || !email || ! password) {
-            return res. status(400).json({
+        if (!username || !fullname || !email || !password) {
+            return res.status(400).json({
                 success: false,
                 message:  'Vui lòng điền đầy đủ thông tin'
             });
@@ -46,7 +46,7 @@ exports.register = async (req, res) => {
         }
 
         const passwordValidation = validatePassword(password);
-        if (!passwordValidation. valid) {
+        if (!passwordValidation.valid) {
             return res. status(400).json({
                 success: false,
                 message:  passwordValidation.message
@@ -54,7 +54,7 @@ exports.register = async (req, res) => {
         }
 
         // Kiểm tra user đã tồn tại
-        const [existingUsers] = await connection. query(
+        const [existingUsers] = await connection.query(
             'SELECT id FROM user WHERE username = ?  OR email = ?',
             [username, email]
         );
@@ -72,7 +72,7 @@ exports.register = async (req, res) => {
         // Thêm user vào database
         const [result] = await connection.query(
             'INSERT INTO user (username, fullname, email, password) VALUES (?, ?, ?, ? )',
-            [username, fullname. trim(), email.toLowerCase(), hashedPassword]
+            [username, fullname.trim(), email.toLowerCase(), hashedPassword]
         );
 
         console.log('Insert result:', result); // Debug
@@ -84,7 +84,7 @@ exports.register = async (req, res) => {
         );
 
         // Kiểm tra có lấy được user không
-        if (! newUsers || newUsers.length === 0) {
+        if (!newUsers || newUsers.length === 0) {
             throw new Error('Không thể lấy thông tin người dùng sau khi tạo');
         }
 
