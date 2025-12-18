@@ -44,21 +44,21 @@ function hideAlert() {
 // ===== LOGIN HANDLER =====
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value;
     const btn = e.target.querySelector('.btn');
-    
+
     // Validation
     if (!username || !password) {
         showAlert('Vui lòng điền đầy đủ thông tin');
         return;
     }
-    
+
     // Disable button & show loading
     btn.disabled = true;
     btn.innerHTML = '<span class="loading"></span>';
-    
+
     try {
         // Call API - Dùng CONFIG.API_URL từ config.js
         const response = await fetch(`${CONFIG.API_URL}/auth/login`, {

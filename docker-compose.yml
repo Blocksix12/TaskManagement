@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+  mysql:
+    image: node:18-alpine
+    environment:
+      MYSQL_DATABASE: TaskManager
+      MYSQL_USER: Nvkhoacoder
+      MYSQL_PASSWORD: 05042004
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
